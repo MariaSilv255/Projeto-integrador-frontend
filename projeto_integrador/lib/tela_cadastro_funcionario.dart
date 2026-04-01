@@ -25,11 +25,25 @@ class _TelaCadastroFuncionarioState extends State<TelaCadastroFuncionario> {
 
   bool _isLoading = false;
 
+  // Controle de lista de usuários / licenças
+  bool _carregandoLista = false;
+  List<Map<String, dynamic>> _usuarios = [];
+  late final int _maxLicencas;
+
+  bool get _atingiuLimite =>
+      _maxLicencas > 0 && _usuarios.length >= _maxLicencas;
+
   static const Color _primaryGreen = Color(0xFF2F6B4F);
 
   @override
   void initState() {
     super.initState();
+    _maxLicencas = int.tryParse(
+          widget.empresa['QuantidadeLicencas']?.toString() ??
+              widget.empresa['quantidadeLicencas']?.toString() ??
+              '0',
+        ) ??
+        0;
     _carregarUsuarios();
   }
  

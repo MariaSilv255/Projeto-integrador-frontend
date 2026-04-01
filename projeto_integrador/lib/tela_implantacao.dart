@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:projeto_integrador/tela_cadastro_empresa.dart';
+import 'package:projeto_integrador/tela_cadastro_funcionario.dart';
 
 class TelaImplantacao extends StatefulWidget {
   final Map<String, dynamic> usuario;
@@ -189,57 +190,85 @@ class _TelaImplantacaoState extends State<TelaImplantacao> {
                                       subtitle: Text(
                                         'Plantações: ${empresa['QuantidadePlantacoes']} • Licenças: ${empresa['QuantidadeLicencas']}',
                                       ),
-                                      trailing: bloqueada
-                                          ? const Icon(Icons.lock, color: Colors.redAccent)
-                                          : IconButton(
-                                              icon: const Icon(Icons.lock_outline),
-                                              tooltip: 'Inativar empresa',
-                                              onPressed: () async {
-                                                final bool? confirmar = await showDialog<bool>(
-                                                  context: context,
-                                                  builder: (context) => AlertDialog(
-                                                    title: const Text('Inativar empresa'),
-                                                    content: Text('Deseja inativar a empresa "${empresa['Nome']}"?'),
-                                                    actions: [
-                                                      TextButton(
-                                                        onPressed: () => Navigator.pop(context, false),
-                                                        child: const Text('Cancelar'),
-                                                      ),
-                                                      TextButton(
-                                                        onPressed: () => Navigator.pop(context, true),
-                                                        child: const Text('Inativar'),
-                                                      ),
-                                                    ],
+                                      onTap: () {
+                                        // Aqui você pode navegar para uma tela de edição detalhada da empresa
+                                        // e reutilizar a tela de funcionários se desejar.
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => TelaCadastroFuncionario(
+                                              empresa: empresa,
+                                              criadorHash: widget.usuario['Matricula']?.toString() ?? '',
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      trailing: IconButton(
+                                        icon: Icon(
+                                          bloqueada ? Icons.lock : Icons.lock_outline,
+                                          color: bloqueada ? Colors.redAccent : null,
+                                        ),
+                                        tooltip: bloqueada ? 'Ativar empresa' : 'Inativar empresa',
+                                        onPressed: () async {
+                                          final bool? confirmar = await showDialog<bool>(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                              title: Text(bloqueada ? 'Ativar empresa' : 'Inativar empresa'),
+                                              content: Text(
+                                                bloqueada
+                                                    ? 'Deseja ativar a empresa "${empresa['Nome']}"?'
+                                                    : 'Deseja inativar a empresa "${empresa['Nome']}"?',
+                                              ),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () => Navigator.pop(context, false),
+                                                  child: const Text('Cancelar'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () => Navigator.pop(context, true),
+                                                  child: Text(bloqueada ? 'Ativar' : 'Inativar'),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+
+                                          if (confirmar == true) {
+                                            try {
+                                              final uri = bloqueada
+                                                  ? Uri.parse('http://localhost:3000/empresas/desbloquear')
+                                                  : Uri.parse('http://localhost:3000/empresas/bloquear');
+
+                                              final response = await http.post(
+                                                uri,
+                                                headers: {'Content-Type': 'application/json'},
+                                                body: jsonEncode({
+                                                  'empresaId': empresa['EmpresaId'],
+                                                }),
+                                              );
+
+                                              if (response.statusCode == 200) {
+                                                _carregarEmpresas();
+                                              } else {
+                                                if (!mounted) return;
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(
+                                                      bloqueada
+                                                          ? 'Falha ao ativar empresa.'
+                                                          : 'Falha ao inativar empresa.',
+                                                    ),
                                                   ),
                                                 );
-
-                                                if (confirmar == true) {
-                                                  try {
-                                                    final response = await http.post(
-                                                      Uri.parse('http://localhost:3000/empresas/bloquear'),
-                                                      headers: {'Content-Type': 'application/json'},
-                                                      body: jsonEncode({
-                                                        'empresaId': empresa['EmpresaId'],
-                                                      }),
-                                                    );
-
-                                                    if (response.statusCode == 200) {
-                                                      _carregarEmpresas();
-                                                    } else {
-                                                      if (!mounted) return;
-                                                      ScaffoldMessenger.of(context).showSnackBar(
-                                                        const SnackBar(content: Text('Falha ao inativar empresa.')),
-                                                      );
-                                                    }
-                                                  } catch (_) {
-                                                    if (!mounted) return;
-                                                    ScaffoldMessenger.of(context).showSnackBar(
-                                                      const SnackBar(content: Text('Erro ao conectar ao servidor.')),
-                                                    );
-                                                  }
-                                                }
-                                              },
-                                            ),
+                                              }
+                                            } catch (_) {
+                                              if (!mounted) return;
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                const SnackBar(content: Text('Erro ao conectar ao servidor.')),
+                                              );
+                                            }
+                                          }
+                                        },
+                                      ),
                                     ),
                                   ),
                                 );
