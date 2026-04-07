@@ -15,7 +15,6 @@ Desenvolver a interface e funcionalidades iniciais de um aplicativo mobile utili
 
 ## Telas do Protótipo:
 
-
  Funcionalidades
  Monitoramento da umidade do solo
  Controle automático de irrigação
@@ -48,6 +47,14 @@ Git
 Uso de Git para controle de versão
 Commits frequentes documentando o progresso
 
+## Print das telas
+<img width="682" height="421" alt="image" src="https://github.com/user-attachments/assets/cd78724a-f362-4042-ab7d-b63848bb6a7d" />
+<img width="718" height="443" alt="image" src="https://github.com/user-attachments/assets/3d8b92bc-2a39-4956-b40c-1746252d16e2" />
+<img width="189" height="520" alt="image" src="https://github.com/user-attachments/assets/c0151b85-a0e9-4c54-912b-c75485108914" />
+<img width="765" height="501" alt="image" src="https://github.com/user-attachments/assets/c96653af-0156-46bc-92c0-326a7bbb3226" />
+<img width="695" height="575" alt="image" src="https://github.com/user-attachments/assets/890476f9-f76a-49c6-b650-298c1442cc60" />
+<img width="373" height="429" alt="image" src="https://github.com/user-attachments/assets/159d5e1e-9c6f-4aeb-a1c1-855c497af163" />
+
 ## Equipe
 - Aline  
 - Bruno   
@@ -58,13 +65,7 @@ Commits frequentes documentando o progresso
 - Raul  
 - Rebeca
 
-PRINTS DAS TELAS
-<img width="682" height="421" alt="image" src="https://github.com/user-attachments/assets/cd78724a-f362-4042-ab7d-b63848bb6a7d" />
-<img width="718" height="443" alt="image" src="https://github.com/user-attachments/assets/3d8b92bc-2a39-4956-b40c-1746252d16e2" />
-<img width="189" height="520" alt="image" src="https://github.com/user-attachments/assets/c0151b85-a0e9-4c54-912b-c75485108914" />
-<img width="765" height="501" alt="image" src="https://github.com/user-attachments/assets/c96653af-0156-46bc-92c0-326a7bbb3226" />
-<img width="695" height="575" alt="image" src="https://github.com/user-attachments/assets/890476f9-f76a-49c6-b650-298c1442cc60" />
-<img width="373" height="429" alt="image" src="https://github.com/user-attachments/assets/159d5e1e-9c6f-4aeb-a1c1-855c497af163" />
+
 
 
 
