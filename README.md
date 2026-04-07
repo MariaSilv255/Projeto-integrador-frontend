@@ -10,7 +10,7 @@ A aplicação permite monitorar as condições do solo e automatizar a irrigaç�
 Desenvolver a interface e funcionalidades iniciais de um aplicativo mobile utilizando Flutter, com base nos protótipos criados no Figma, como parte do Projeto Integrador.
 
  Protótipo (Figma)
- Acesse: https://www.figma.com/design/YUP2HoXGPRbjeQiaYKgmeb/INICIAL?node-id=0-1&t=FujhmL3VU4P9OcpC-0
+ Acesse: https://www.figma.com/design/YUP2HoXGPRbjeQiaYKgmeb/INICIAL?node-id=0-1&t=p2Ltnb1lcIliyNCq-1
 
 
 ## Telas do Protótipo:
