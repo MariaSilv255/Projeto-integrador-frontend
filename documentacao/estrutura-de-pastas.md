@@ -16,3 +16,4 @@ lib/
 ├── tela_recuperar_senha.dart # Tela de Recuperação de Senha
 └── dashBoard.dart            # Dashboard de monitoramento
 ```
+
