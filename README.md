@@ -68,7 +68,7 @@ Commits frequentes documentando o progresso
 
 # Documentação
 
-## Estrutura do Projeto
+## Estrutura do Projeto'
 
 ```text
 lib/
