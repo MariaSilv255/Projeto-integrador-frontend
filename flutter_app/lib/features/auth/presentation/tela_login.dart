@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:projeto_integrador/tela_principal.dart';
-import 'package:projeto_integrador/tela_recuperar_senha.dart';
+import 'package:projeto_integrador/features/home/tela_principal.dart';
+import 'package:projeto_integrador/features/auth/presentation/tela_recuperar_senha.dart';
 import 'package:projeto_integrador/tela_implantacao.dart';
 
 class TelaLogin extends StatefulWidget {
@@ -14,7 +14,7 @@ class TelaLogin extends StatefulWidget {
 
 class _TelaLoginState extends State<TelaLogin> {
   final _formKey = GlobalKey<FormState>();
-  
+
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
   bool _isLoading = false;
@@ -90,21 +90,34 @@ class _TelaLoginState extends State<TelaLogin> {
                         fillColor: Colors.white,
                         enabledBorder: inputBorder,
                         focusedBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(color: _primaryGreen, width: 1.5),
+                          borderSide: const BorderSide(
+                            color: _primaryGreen,
+                            width: 1.5,
+                          ),
                         ),
                         errorBorder: inputBorder.copyWith(
                           borderSide: const BorderSide(color: Colors.red),
                         ),
                         focusedErrorBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(color: Colors.red, width: 1.5),
+                          borderSide: const BorderSide(
+                            color: Colors.red,
+                            width: 1.5,
+                          ),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 14,
+                        ),
                         suffixIcon: _emailController.text.isEmpty
                             ? null
                             : IconButton(
                                 tooltip: 'Limpar',
                                 onPressed: () => _emailController.clear(),
-                                icon: const Icon(Icons.close, size: 18, color: Color(0xFF64748B)),
+                                icon: const Icon(
+                                  Icons.close,
+                                  size: 18,
+                                  color: Color(0xFF64748B),
+                                ),
                               ),
                       ),
                       validator: (String? value) {
@@ -124,21 +137,34 @@ class _TelaLoginState extends State<TelaLogin> {
                         fillColor: Colors.white,
                         enabledBorder: inputBorder,
                         focusedBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(color: _primaryGreen, width: 1.5),
+                          borderSide: const BorderSide(
+                            color: _primaryGreen,
+                            width: 1.5,
+                          ),
                         ),
                         errorBorder: inputBorder.copyWith(
                           borderSide: const BorderSide(color: Colors.red),
                         ),
                         focusedErrorBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(color: Colors.red, width: 1.5),
+                          borderSide: const BorderSide(
+                            color: Colors.red,
+                            width: 1.5,
+                          ),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 14,
+                        ),
                         suffixIcon: _senhaController.text.isEmpty
                             ? null
                             : IconButton(
                                 tooltip: 'Limpar',
                                 onPressed: () => _senhaController.clear(),
-                                icon: const Icon(Icons.close, size: 18, color: Color(0xFF64748B)),
+                                icon: const Icon(
+                                  Icons.close,
+                                  size: 18,
+                                  color: Color(0xFF64748B),
+                                ),
                               ),
                       ),
                       validator: (String? value) {
@@ -162,7 +188,10 @@ class _TelaLoginState extends State<TelaLogin> {
                         },
                         style: TextButton.styleFrom(
                           foregroundColor: const Color(0xFF334155),
-                          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 6,
+                            vertical: 6,
+                          ),
                           textStyle: const TextStyle(fontSize: 12),
                         ),
                         child: const Text('Esqueceu a senha?'),
@@ -179,13 +208,17 @@ class _TelaLoginState extends State<TelaLogin> {
                                   _login();
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Preencha email e senha.')),
+                                    const SnackBar(
+                                      content: Text('Preencha email e senha.'),
+                                    ),
                                   );
                                 }
                               },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: _primaryGreen,
-                          disabledBackgroundColor: _primaryGreen.withValues(alpha: 0.6),
+                          disabledBackgroundColor: _primaryGreen.withValues(
+                            alpha: 0.6,
+                          ),
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -196,7 +229,10 @@ class _TelaLoginState extends State<TelaLogin> {
                             ? const SizedBox(
                                 width: 18,
                                 height: 18,
-                                child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
                               )
                             : const Text(
                                 'Acessar',
@@ -258,7 +294,9 @@ class _TelaLoginState extends State<TelaLogin> {
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Login falhou! Verifique suas credenciais.')),
+          const SnackBar(
+            content: Text('Login falhou! Verifique suas credenciais.'),
+          ),
         );
       }
     } catch (e) {

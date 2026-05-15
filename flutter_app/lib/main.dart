@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_integrador/tela_login.dart';
+import 'package:projeto_integrador/features/auth/presentation/tela_login.dart';
 
 void main() {
   runApp(const MainApp());
@@ -12,9 +12,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Projeto Integrador',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
+      theme: ThemeData(primarySwatch: Colors.green),
       home: const TelaLogin(),
     );
   }
