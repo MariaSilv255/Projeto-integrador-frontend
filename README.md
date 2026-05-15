@@ -1,6 +1,6 @@
 ## Sistema de Irrigação Inteligente
 
-## Equipe: AgroTech Solutions(Soluções AgroTech).
+## Equipe: AgroTech Solutions
 
 ## Descrição
 Este projeto tem como objetivo desenvolver uma aplicação mobile para automação de sistemas de irrigação, utilizando dados do solo como umidade para auxiliar na tomada de decisões.
@@ -15,27 +15,28 @@ Desenvolver a interface e funcionalidades iniciais de um aplicativo mobile utili
 
 ## Telas do Protótipo:
 
- Funcionalidades
- Monitoramento da umidade do solo
- Controle automático de irrigação
- Tela de login e autenticação
- Visualização de dados em tempo real
- Interface intuitiva para o usuário
+ ### Funcionalidades
+ - Monitoramento da umidade do solo
+ - Controle automático e manual de irrigação
+ - Tela de login e autenticação
+ - Visualização de dados em tempo real
+ - Interface intuitiva para o usuário
 
 ##  Fluxo da Aplicação
 1. O usuário acessa o aplicativo
 2. Realiza login com email e senha
-3. O administrador cadastra a empresa
+3. O administrador cadastra a empresa **(Funcionalidade removida do projeto)**
 4. O usuário acessa a tela principal
 5. Visualiza os dados do solo
 6. Controla ou monitora a irrigação
 
 ## Tecnologias Utilizadas
-Flutter
-Dart
-Android Studio
-Figma
-Git
+
+- Flutter
+- Dart
+- Android Studio
+- Figma
+- Git
 
 ## Melhorias Futuras
 - Integração com sensores reais de umidade do solo
