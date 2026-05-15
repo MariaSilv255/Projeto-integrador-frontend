@@ -9,8 +9,8 @@ A aplicação permite monitorar as condições do solo e automatizar a irrigaç�
 ## Objetivo
 Desenvolver a interface e funcionalidades iniciais de um aplicativo mobile utilizando Flutter, com base nos protótipos criados no Figma, como parte do Projeto Integrador.
 
- Protótipo (Figma)
- Acesse: https://www.figma.com/design/YUP2HoXGPRbjeQiaYKgmeb/INICIAL?node-id=0-1&t=p2Ltnb1lcIliyNCq-1
+## Protótipo (Figma)
+- [Acesse o Protótipo no Figma](https://www.figma.com/design/YUP2HoXGPRbjeQiaYKgmeb/INICIAL?node-id=0-1&t=p2Ltnb1lcIliyNCq-1)
 
 
 ## Telas do Protótipo:
@@ -70,26 +70,19 @@ Commits frequentes documentando o progresso
 
 ## Estrutura do Projeto
 
+```text
 lib/
-├── core/
-│   ├── auth/                 # Lógica de auth que o app inteiro usa
-│   │   ├── auth_provider.dart # O "Estado" do usuário (Logado/Deslogado)
-│   │   └── user_entity.dart   # Modelo do usuário logado
-│   └── router/               # Configuração de rotas (GoRouter é recomendado)
-├── features/
-│   ├── auth/                 # Tudo sobre o Login
-│   │   ├── data/             # Chamada de API de login, persistência de Token
-│   │   ├── presentation/     # Telas de Login, Recuperar Senha, etc.
-│   │   └── domain/           # Regras de negócio do login
-│   ├── home/                 # Tela principal após o login
+├── features/                 # Módulos baseados em funcionalidades
+│   ├── auth/                 # Tudo sobre Autenticação
+│   │   ├── data/             # Chamada de API, persistência de Token
+│   │   ├── domain/           # Regras de negócio e entidades
+│   │   └── presentation/     # Telas e Widgets de Login/Cadastro
+│   ├── home/                 # Funcionalidades da tela principal
 │   └── splash/               # Tela de carregamento inicial
-├── main.dart
-└── app.dart                  # Onde a mágica da decisão acontece
-
-
-
-
-
-
-
-
+├── main.dart                 # Ponto de entrada do aplicativo
+├── tela_login.dart           # Tela de Login
+├── tela_cadastro.dart        # Tela de Cadastro
+├── tela_principal.dart       # Tela Principal
+├── tela_recuperar_senha.dart # Tela de Recuperação de Senha
+└── dashBoard.dart            # Dashboard de monitoramento
+```
