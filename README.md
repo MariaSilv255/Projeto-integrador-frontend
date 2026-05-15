@@ -66,6 +66,26 @@ Commits frequentes documentando o progresso
 - Raul  
 - Rebeca
 
+# Documentação
+
+## Estrutura do Projeto
+
+lib/
+├── core/
+│   ├── auth/                 # Lógica de auth que o app inteiro usa
+│   │   ├── auth_provider.dart # O "Estado" do usuário (Logado/Deslogado)
+│   │   └── user_entity.dart   # Modelo do usuário logado
+│   └── router/               # Configuração de rotas (GoRouter é recomendado)
+├── features/
+│   ├── auth/                 # Tudo sobre o Login
+│   │   ├── data/             # Chamada de API de login, persistência de Token
+│   │   ├── presentation/     # Telas de Login, Recuperar Senha, etc.
+│   │   └── domain/           # Regras de negócio do login
+│   ├── home/                 # Tela principal após o login
+│   └── splash/               # Tela de carregamento inicial
+├── main.dart
+└── app.dart                  # Onde a mágica da decisão acontece
+
 
 
 
