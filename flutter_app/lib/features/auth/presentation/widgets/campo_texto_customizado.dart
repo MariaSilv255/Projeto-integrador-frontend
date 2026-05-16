@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class CampoTextoCustomizado extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;

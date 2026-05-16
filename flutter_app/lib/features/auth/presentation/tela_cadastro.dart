@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:projeto_integrador/features/auth/presentation/widgets/custom_text_field.dart';
+import 'package:projeto_integrador/features/auth/presentation/widgets/campo_texto_customizado.dart';
 
 class TelaCadastro extends StatefulWidget {
   const TelaCadastro({super.key});
@@ -140,8 +140,8 @@ class _TelaCadastroState extends State<TelaCadastro> {
                       ),
                     ),
                     const SizedBox(height: 28),
-                    // Uso de CustomTextField reduz a duplicação de código visual
-                    CustomTextField(
+                    // Uso de CampoTextoCustomizado reduz a duplicação de código visual
+                    CampoTextoCustomizado(
                       controller: _nomeController,
                       hintText: 'Nome completo',
                       textCapitalization: TextCapitalization.words,
@@ -154,7 +154,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                       },
                     ),
                     const SizedBox(height: 14),
-                    CustomTextField(
+                    CampoTextoCustomizado(
                       controller: _emailController,
                       hintText: 'Email',
                       keyboardType: TextInputType.emailAddress,
@@ -170,7 +170,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                       },
                     ),
                     const SizedBox(height: 14),
-                    CustomTextField(
+                    CampoTextoCustomizado(
                       controller: _senhaController,
                       hintText: 'Senha',
                       obscureText: true,
@@ -185,7 +185,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
                       },
                     ),
                     const SizedBox(height: 14),
-                    CustomTextField(
+                    CampoTextoCustomizado(
                       controller: _confirmSenhaController,
                       hintText: 'Confirmar senha',
                       obscureText: true,

@@ -14,5 +14,7 @@
 
 8. Para cada arquivo criado, deve-se adicionar um comentario no topo do arquivo explicando o que é o arquivo. (O comentário deve estar em português).
 
+9. O nome dos arquivos devem ser em portugues. Usando a nomenclatura snake_case.
+
 
 

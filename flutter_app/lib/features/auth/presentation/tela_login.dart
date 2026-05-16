@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:projeto_integrador/features/home/presentation/tela_principal.dart';
 import 'package:projeto_integrador/features/auth/presentation/tela_recuperar_senha.dart';
 import 'package:projeto_integrador/features/auth/presentation/tela_cadastro.dart';
-import 'package:projeto_integrador/features/auth/presentation/widgets/custom_text_field.dart';
+import 'package:projeto_integrador/features/auth/presentation/widgets/campo_texto_customizado.dart';
 
 class TelaLogin extends StatefulWidget {
   const TelaLogin({super.key});
@@ -81,7 +81,7 @@ class _TelaLoginState extends State<TelaLogin> {
                     ),
                     const SizedBox(height: 28),
                     // Uso do widget extraído para simplificar o código
-                    CustomTextField(
+                    CampoTextoCustomizado(
                       controller: _emailController,
                       hintText: 'Email',
                       keyboardType: TextInputType.emailAddress,
@@ -93,7 +93,7 @@ class _TelaLoginState extends State<TelaLogin> {
                       },
                     ),
                     const SizedBox(height: 14),
-                    CustomTextField(
+                    CampoTextoCustomizado(
                       controller: _senhaController,
                       hintText: 'Senha',
                       obscureText: true,

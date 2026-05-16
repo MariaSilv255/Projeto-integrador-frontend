@@ -2,7 +2,7 @@
 // Sua principal responsabilidade é capturar o email do usuário para envio de um link de recuperação.
 
 import 'package:flutter/material.dart';
-import 'package:projeto_integrador/features/auth/presentation/widgets/custom_text_field.dart';
+import 'package:projeto_integrador/features/auth/presentation/widgets/campo_texto_customizado.dart';
 
 class TelaRecuperarSenha extends StatefulWidget {
   const TelaRecuperarSenha({super.key});
@@ -95,7 +95,7 @@ class _TelaRecuperarSenhaState extends State<TelaRecuperarSenha> {
                     ),
                     const SizedBox(height: 8),
                     // Uso do CustomTextField para reduzir duplicação de código visual
-                    CustomTextField(
+                    CampoTextoCustomizado(
                       controller: _emailController,
                       hintText: 'seu@email.com',
                       keyboardType: TextInputType.emailAddress,
