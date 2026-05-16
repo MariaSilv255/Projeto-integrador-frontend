@@ -1,8 +1,13 @@
+// Este arquivo representa a tela de login do aplicativo.
+// A responsabilidade deste arquivo é capturar as credenciais do usuário e fazer a autenticação.
+
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:projeto_integrador/features/home/presentation/tela_principal.dart';
 import 'package:projeto_integrador/features/auth/presentation/tela_recuperar_senha.dart';
+import 'package:projeto_integrador/features/auth/presentation/tela_cadastro.dart';
+import 'package:projeto_integrador/features/auth/presentation/widgets/custom_text_field.dart';
 
 class TelaLogin extends StatefulWidget {
   const TelaLogin({super.key});
@@ -43,11 +48,6 @@ class _TelaLoginState extends State<TelaLogin> {
 
   @override
   Widget build(BuildContext context) {
-    final inputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
-    );
-
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -80,45 +80,11 @@ class _TelaLoginState extends State<TelaLogin> {
                       ),
                     ),
                     const SizedBox(height: 28),
-                    TextFormField(
+                    // Uso do widget extraído para simplificar o código
+                    CustomTextField(
                       controller: _emailController,
+                      hintText: 'Email',
                       keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        filled: true,
-                        fillColor: Colors.white,
-                        enabledBorder: inputBorder,
-                        focusedBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(
-                            color: _primaryGreen,
-                            width: 1.5,
-                          ),
-                        ),
-                        errorBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(color: Colors.red),
-                        ),
-                        focusedErrorBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(
-                            color: Colors.red,
-                            width: 1.5,
-                          ),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 14,
-                        ),
-                        suffixIcon: _emailController.text.isEmpty
-                            ? null
-                            : IconButton(
-                                tooltip: 'Limpar',
-                                onPressed: () => _emailController.clear(),
-                                icon: const Icon(
-                                  Icons.close,
-                                  size: 18,
-                                  color: Color(0xFF64748B),
-                                ),
-                              ),
-                      ),
                       validator: (String? value) {
                         if (value == null || value.trim().isEmpty) {
                           return 'Informe seu email';
@@ -127,45 +93,10 @@ class _TelaLoginState extends State<TelaLogin> {
                       },
                     ),
                     const SizedBox(height: 14),
-                    TextFormField(
+                    CustomTextField(
                       controller: _senhaController,
+                      hintText: 'Senha',
                       obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'Senha',
-                        filled: true,
-                        fillColor: Colors.white,
-                        enabledBorder: inputBorder,
-                        focusedBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(
-                            color: _primaryGreen,
-                            width: 1.5,
-                          ),
-                        ),
-                        errorBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(color: Colors.red),
-                        ),
-                        focusedErrorBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(
-                            color: Colors.red,
-                            width: 1.5,
-                          ),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 14,
-                        ),
-                        suffixIcon: _senhaController.text.isEmpty
-                            ? null
-                            : IconButton(
-                                tooltip: 'Limpar',
-                                onPressed: () => _senhaController.clear(),
-                                icon: const Icon(
-                                  Icons.close,
-                                  size: 18,
-                                  color: Color(0xFF64748B),
-                                ),
-                              ),
-                      ),
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Informe sua senha';
@@ -178,6 +109,7 @@ class _TelaLoginState extends State<TelaLogin> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
+                          // Navegando para a tela de recuperar senha
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -240,6 +172,35 @@ class _TelaLoginState extends State<TelaLogin> {
                       ),
                     ),
                     const SizedBox(height: 14),
+                    // Adicionado botão para tela de cadastro conforme fluxo do projeto
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Não tem uma conta?',
+                          style: TextStyle(fontSize: 12, color: _primaryGreen),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const TelaCadastro(),
+                              ),
+                            );
+                          },
+                          style: TextButton.styleFrom(
+                            foregroundColor: _primaryGreen,
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                            textStyle: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          child: const Text('Cadastrar'),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -255,6 +216,7 @@ class _TelaLoginState extends State<TelaLogin> {
       _isLoading = true;
     });
     try {
+      // Fazendo chamada HTTP simulada para o backend
       final response = await http.post(
         Uri.parse('http://localhost:3000/login'),
         headers: {'Content-Type': 'application/json'},
@@ -278,19 +240,11 @@ class _TelaLoginState extends State<TelaLogin> {
           const SnackBar(content: Text('Tudo certo! Entrando...')),
         );
 
-        if (tipo == 1) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => TelaImplantacao(usuario: user),
-            ),
-          );
-        } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const TelaPrincipal()),
-          );
-        }
+        // Navega para a tela principal (removida a implantação não declarada)
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const TelaPrincipal()),
+        );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

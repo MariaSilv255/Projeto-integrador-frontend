@@ -1,6 +1,10 @@
+// Este arquivo representa a tela de cadastro.
+// Tem a responsabilidade de criar novas contas para acesso ao sistema.
+
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:projeto_integrador/features/auth/presentation/widgets/custom_text_field.dart';
 
 class TelaCadastro extends StatefulWidget {
   const TelaCadastro({super.key});
@@ -48,6 +52,7 @@ class _TelaCadastroState extends State<TelaCadastro> {
     });
 
     try {
+      // Simulando a conexão com a API de registro
       final response = await http.post(
         Uri.parse('http://localhost:3000/register'),
         headers: {'Content-Type': 'application/json'},
@@ -103,40 +108,6 @@ class _TelaCadastroState extends State<TelaCadastro> {
 
   @override
   Widget build(BuildContext context) {
-    final inputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
-    );
-
-    InputDecoration decorationFor({
-      required String hint,
-      required TextEditingController controller,
-    }) {
-      return InputDecoration(
-        hintText: hint,
-        filled: true,
-        fillColor: Colors.white,
-        enabledBorder: inputBorder,
-        focusedBorder: inputBorder.copyWith(
-          borderSide: const BorderSide(color: _primaryGreen, width: 1.5),
-        ),
-        errorBorder: inputBorder.copyWith(
-          borderSide: const BorderSide(color: Colors.red),
-        ),
-        focusedErrorBorder: inputBorder.copyWith(
-          borderSide: const BorderSide(color: Colors.red, width: 1.5),
-        ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-        suffixIcon: controller.text.isEmpty
-            ? null
-            : IconButton(
-                tooltip: 'Limpar',
-                onPressed: controller.clear,
-                icon: const Icon(Icons.close, size: 18, color: Color(0xFF64748B)),
-              ),
-      );
-    }
-
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -169,14 +140,12 @@ class _TelaCadastroState extends State<TelaCadastro> {
                       ),
                     ),
                     const SizedBox(height: 28),
-                    TextFormField(
+                    // Uso de CustomTextField reduz a duplicação de código visual
+                    CustomTextField(
                       controller: _nomeController,
+                      hintText: 'Nome completo',
                       textCapitalization: TextCapitalization.words,
                       keyboardType: TextInputType.name,
-                      decoration: decorationFor(
-                        hint: 'Nome completo',
-                        controller: _nomeController,
-                      ),
                       validator: (String? value) {
                         if (value == null || value.trim().isEmpty) {
                           return 'Informe seu nome completo';
@@ -185,13 +154,10 @@ class _TelaCadastroState extends State<TelaCadastro> {
                       },
                     ),
                     const SizedBox(height: 14),
-                    TextFormField(
+                    CustomTextField(
                       controller: _emailController,
+                      hintText: 'Email',
                       keyboardType: TextInputType.emailAddress,
-                      decoration: decorationFor(
-                        hint: 'Email',
-                        controller: _emailController,
-                      ),
                       validator: (String? value) {
                         final email = (value ?? '').trim();
                         if (email.isEmpty) {
@@ -204,13 +170,10 @@ class _TelaCadastroState extends State<TelaCadastro> {
                       },
                     ),
                     const SizedBox(height: 14),
-                    TextFormField(
+                    CustomTextField(
                       controller: _senhaController,
+                      hintText: 'Senha',
                       obscureText: true,
-                      decoration: decorationFor(
-                        hint: 'Senha',
-                        controller: _senhaController,
-                      ),
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Informe sua senha';
@@ -222,13 +185,10 @@ class _TelaCadastroState extends State<TelaCadastro> {
                       },
                     ),
                     const SizedBox(height: 14),
-                    TextFormField(
+                    CustomTextField(
                       controller: _confirmSenhaController,
+                      hintText: 'Confirmar senha',
                       obscureText: true,
-                      decoration: decorationFor(
-                        hint: 'Confirmar senha',
-                        controller: _confirmSenhaController,
-                      ),
                       validator: (String? value) {
                         if (value == null || value.isEmpty) {
                           return 'Confirme sua senha';
@@ -299,3 +259,4 @@ class _TelaCadastroState extends State<TelaCadastro> {
     );
   }
 }
+

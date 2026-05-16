@@ -1,4 +1,8 @@
+// Este arquivo representa a tela de recuperação de senha.
+// Sua principal responsabilidade é capturar o email do usuário para envio de um link de recuperação.
+
 import 'package:flutter/material.dart';
+import 'package:projeto_integrador/features/auth/presentation/widgets/custom_text_field.dart';
 
 class TelaRecuperarSenha extends StatefulWidget {
   const TelaRecuperarSenha({super.key});
@@ -34,11 +38,6 @@ class _TelaRecuperarSenhaState extends State<TelaRecuperarSenha> {
 
   @override
   Widget build(BuildContext context) {
-    final inputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-      borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
-    );
-
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       body: SafeArea(
@@ -95,32 +94,11 @@ class _TelaRecuperarSenhaState extends State<TelaRecuperarSenha> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    TextFormField(
+                    // Uso do CustomTextField para reduzir duplicação de código visual
+                    CustomTextField(
                       controller: _emailController,
+                      hintText: 'seu@email.com',
                       keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        hintText: 'seu@email.com',
-                        filled: true,
-                        fillColor: Colors.white,
-                        enabledBorder: inputBorder,
-                        focusedBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(color: _primaryGreen, width: 1.5),
-                        ),
-                        errorBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(color: Colors.red),
-                        ),
-                        focusedErrorBorder: inputBorder.copyWith(
-                          borderSide: const BorderSide(color: Colors.red, width: 1.5),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-                        suffixIcon: _emailController.text.isEmpty
-                            ? null
-                            : IconButton(
-                                tooltip: 'Limpar',
-                                onPressed: () => _emailController.clear(),
-                                icon: const Icon(Icons.close, size: 18, color: Color(0xFF64748B)),
-                              ),
-                      ),
                       validator: (value) {
                         final email = (value ?? '').trim();
                         if (email.isEmpty) return 'Informe seu email';
@@ -201,3 +179,4 @@ class _TelaRecuperarSenhaState extends State<TelaRecuperarSenha> {
     }
   }
 }
+
