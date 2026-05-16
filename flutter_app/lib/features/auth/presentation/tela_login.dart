@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:projeto_integrador/features/home/tela_principal.dart';
+import 'package:projeto_integrador/features/home/presentation/tela_principal.dart';
 import 'package:projeto_integrador/features/auth/presentation/tela_recuperar_senha.dart';
 
 class TelaLogin extends StatefulWidget {
