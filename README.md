@@ -37,6 +37,7 @@ Desenvolver a interface e funcionalidades iniciais de um aplicativo mobile utili
 - Android Studio
 - Figma
 - Git
+- Trello
 
 ## Melhorias Futuras
 - Integração com sensores reais de umidade do solo
