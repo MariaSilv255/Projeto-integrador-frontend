@@ -38,6 +38,7 @@ Desenvolver a interface e funcionalidades iniciais de um aplicativo mobile utili
 - Figma
 - Git
 - Trello
+- Azure
 
 ## Melhorias Futuras
 - Integração com sensores reais de umidade do solo
