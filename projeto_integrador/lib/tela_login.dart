@@ -15,7 +15,7 @@ class TelaLogin extends StatefulWidget {
 class _TelaLoginState extends State<TelaLogin> {
   final _formKey = GlobalKey<FormState>();
   
-  final _emailController = TextEditingController();
+  final _nomeUsuarioController = TextEditingController();
   final _senhaController = TextEditingController();
   bool _isLoading = false;
 
@@ -24,7 +24,7 @@ class _TelaLoginState extends State<TelaLogin> {
   @override
   void initState() {
     super.initState();
-    _emailController.addListener(_onTextChanged);
+    _nomeUsuarioController.addListener(_onTextChanged);
     _senhaController.addListener(_onTextChanged);
   }
 
@@ -35,9 +35,9 @@ class _TelaLoginState extends State<TelaLogin> {
 
   @override
   void dispose() {
-    _emailController.removeListener(_onTextChanged);
+    _nomeUsuarioController.removeListener(_onTextChanged);
     _senhaController.removeListener(_onTextChanged);
-    _emailController.dispose();
+    _nomeUsuarioController.dispose();
     _senhaController.dispose();
     super.dispose();
   }
@@ -82,10 +82,10 @@ class _TelaLoginState extends State<TelaLogin> {
                     ),
                     const SizedBox(height: 28),
                     TextFormField(
-                      controller: _emailController,
-                      keyboardType: TextInputType.emailAddress,
+                      controller: _nomeUsuarioController,
+                      keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                        hintText: 'Email',
+                        hintText: 'Nome de usuário',
                         filled: true,
                         fillColor: Colors.white,
                         enabledBorder: inputBorder,
@@ -99,17 +99,17 @@ class _TelaLoginState extends State<TelaLogin> {
                           borderSide: const BorderSide(color: Colors.red, width: 1.5),
                         ),
                         contentPadding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-                        suffixIcon: _emailController.text.isEmpty
+                        suffixIcon: _nomeUsuarioController.text.isEmpty
                             ? null
                             : IconButton(
                                 tooltip: 'Limpar',
-                                onPressed: () => _emailController.clear(),
+                                onPressed: () => _nomeUsuarioController.clear(),
                                 icon: const Icon(Icons.close, size: 18, color: Color(0xFF64748B)),
                               ),
                       ),
                       validator: (String? value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Informe seu email';
+                          return 'Informe seu nome de usuário';
                         }
                         return null;
                       },
@@ -179,7 +179,7 @@ class _TelaLoginState extends State<TelaLogin> {
                                   _login();
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Preencha email e senha.')),
+                                    const SnackBar(content: Text('Preencha nome de usuário e senha.')),
                                   );
                                 }
                               },
@@ -224,7 +224,7 @@ class _TelaLoginState extends State<TelaLogin> {
         Uri.parse('http://10.0.2.2:8000/login'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
-          'email': _emailController.text.trim(),
+          'nome_usuario': _nomeUsuarioController.text.trim(),
           'senha': _senhaController.text,
         }),
       );
@@ -232,30 +232,15 @@ class _TelaLoginState extends State<TelaLogin> {
       if (!mounted) return;
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body) as Map<String, dynamic>;
-        final user = data['user'] as Map<String, dynamic>;
-        final dynamic tipoRaw = user['Tipo'];
-        final int tipo = tipoRaw is int
-            ? tipoRaw
-            : int.tryParse(tipoRaw?.toString() ?? '0') ?? 0;
-
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Tudo certo! Entrando...')),
         );
 
-        if (tipo == 1) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => TelaImplantacao(usuario: user),
-            ),
-          );
-        } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const TelaPrincipal()),
-          );
-        }
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const TelaPrincipal()),
+        );
+        
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Login falhou! Verifique suas credenciais.')),

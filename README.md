@@ -65,7 +65,7 @@ Desenvolver a interface e funcionalidades iniciais de um aplicativo mobile utili
 
 4.  **Execute o servidor:**
     ```sh
-    uvicorn main:app --reload
+    uvicorn app.main:app --reload
     ```
     O servidor estará disponível em `http://127.0.0.1:8000`.
 
